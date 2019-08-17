@@ -60,12 +60,16 @@ export default {
 		},
 		rejoinedActivityRoom() {
 			console.log('rejoined room')
+			this.$socket.emit('checkActivityStatus', this.room)
 		},
 		activityCanceled() {
 			this.$router.push('/cancel')
 		},
 		roomJoinRejected() {
 			this.$router.push('/error')
+		},
+		participationRejected() {
+			this.$router.push('/end')
 		}
 	},
 	methods: {
