@@ -1,11 +1,23 @@
 <template>
 	<div class="container">
 		<header>
-			<img ref="logo" :class="[loading ? 'loading':'']" src="@/assets/activities-circle.svg" alt="activities logo" id="logo">
+			<transition name="fade" mode="out-in">
+				<img ref="logo" v-if="loading" src="@/assets/activities-circle.svg" alt="activities logo" id="logo" key="logo">
+				<img ref="illustration" v-else src="@/assets/survey-illustration.svg" alt="survey illustration" id="illustration" key="illustration">
+			</transition>
 		</header>
 		<main>
-			<input v-if="mode == 'chart'" type="text" v-model="username">
-			<h4 v-if="!loading">Waiting for activity to begin...</h4>
+			<section id="autocompleteOptions">
+				<button class="autocomplete-button" v-for="(student, index) in possibleNames" @click="setName(student)">
+					{{ student.shortName }}
+				</button>
+				<span v-if="possibleNames.length == 2">...</span>
+			</section>
+			<section id="usernameArea" v-if="mode == 'chart' && !nameConfirmed">
+				<input type="text" v-model="username">
+				<button id="confirmButton" @click="confirmName" :disabled="selectedName.shortName == ''">Connect</button>
+			</section>
+			<h4 v-if="!loading && nameConfirmed || mode == 'anonymously'">Waiting for activity to begin...</h4>
 		</main>
 	</div>
 </template>
@@ -20,7 +32,12 @@ export default {
 	},
 	data() {
 		return {
-			username: ''
+			username: '',
+			selectedName: {
+				shortName: '',
+				fullName: {}
+			},
+			nameConfirmed: false
 		}
 	},
 	computed: {
@@ -35,6 +52,26 @@ export default {
 		},
 		date() {
 			return this.$store.state.activityDate
+		},
+		possibleNames() {
+			let allNames = this.$store.state.students
+
+			let filteredNames = allNames.filter(student => {
+				return student.firstName.toLowerCase().includes(this.username.toLowerCase())
+			})
+
+			let arr = filteredNames.map(student => {
+				return {
+					shortName:`${student.firstName} ${student.lastName[0]}${student.lastName[1]}.`,
+					fullName: student
+				}
+			})
+
+			if (arr.length > 2) {
+				return arr.splice(0, 2)
+			} else {
+				return arr
+			}
 		}
 	},
 	sockets: {
@@ -60,6 +97,7 @@ export default {
 		},
 		rejoinedActivityRoom() {
 			console.log('rejoined room')
+			this.$socket.emit('requestActivityData')
 			this.$socket.emit('checkActivityStatus', this.room)
 		},
 		activityCanceled() {
@@ -80,15 +118,11 @@ export default {
         },
         startActivity() {
         	if (!this.activityAlreadyCompleted(this.room)) {
-        		if (this.mode !== 'chart') {
-					let scope = this
+        		let scope = this
 
-					setTimeout(function() {
-						scope.$router.push('/activity')
-					}, 1000, scope)
-				} else {
-					// todo
-				}
+				setTimeout(function() {
+					scope.$router.push('/activity')
+				}, 1000, scope)
         	} else {
         		this.$router.push('/end')
         	}
@@ -110,6 +144,16 @@ export default {
 	    			return false
 	    		}
     		}
+    	},
+    	setName(studentName) {
+    		this.username = `${studentName.fullName.firstName} ${studentName.fullName.lastName}`
+    		this.selectedName = studentName
+    	},
+    	confirmName() {
+    		this.$store.dispatch('setUsername', this.selectedName)
+    		this.nameConfirmed = true
+    		this.$socket.emit('checkActivityStatus', this.room)
+    		this.$socket.emit('sendingUsername', this.selectedName.shortName)
     	}
 	},
 	mounted() {
@@ -135,7 +179,7 @@ export default {
 	height: 100%;
 	min-height: 100vh;
 	display: grid;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 40vh 1fr;
 	grid-template-areas: 
 		"header"
 		"main";
@@ -155,9 +199,6 @@ main {
 
 #logo {
 	height: 5em;
-}
-
-.loading {
 	animation-name: spin;
 	animation-iteration-count: infinite;
 	animation-duration: 1.5s;
@@ -167,10 +208,62 @@ main {
 
 h4 {
 	color: var(--light-gray);
+	text-align: center;
+}
+
+#usernameArea {
+	text-align: center;
+	width: 300px;
+}
+
+#autocompleteOptions {
+	width: 300px;
+	height: 50px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	overflow: -moz-scrollbars-horizontal;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#autocompleteOptions > span {
+	color: var(--light-gray);
+}
+
+.autocomplete-button {
+	color: var(--white);
+	margin: 10px;
+	font-size: 1em;
+	border-bottom: 1px solid var(--yellow);
+}
+
+#confirmButton {
+	padding: 5px 10px;
+	font-size: 1.3em;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid var(--gray);
+  	display: block;
+  	outline: none;
+  	background: var(--yellow);
+	margin: 20px auto 50px auto;
+}
+
+#confirmButton:disabled {
+	opacity: .7;
+	cursor: not-allowed;
 }
 
 @keyframes spin {
 	from {transform: rotate(0deg);}
 	to {transform: rotate(360deg);}
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

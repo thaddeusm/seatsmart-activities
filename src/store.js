@@ -11,7 +11,12 @@ export default new Vuex.Store({
 		activityData: '',
 		activityDate: {},
 		mode: '',
-		activityComplete: false
+		activityComplete: false,
+		students: [],
+		username: {
+			firstName: '',
+			lastName: ''
+		}
 	},
 	mutations: {
 		setRoomID(state, roomID) {
@@ -25,9 +30,15 @@ export default new Vuex.Store({
 			state.activityData = data.activityData
 			state.mode = data.activityMode
 			state.activityDate = data.activityDate.split('T')[0]
+			if (data.students) {
+				state.students = data.students
+			}
 		},
 		setActivityComplete(state) {
 			state.activityComplete = true
+		},
+		setUsername(state, studentName) {
+			state.username = studentName.fullName
 		}
 	},
 	actions: {
@@ -42,6 +53,9 @@ export default new Vuex.Store({
 		},
 		setActivityComplete(context) {
 			context.commit('setActivityComplete')
+		},
+		setUsername(context, studentName) {
+			context.commit('setUsername', studentName)
 		}
 	}
 })

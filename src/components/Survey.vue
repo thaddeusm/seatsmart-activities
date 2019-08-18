@@ -80,6 +80,9 @@ export default {
 		},
 		date() {
 			return this.$store.state.activityDate
+		},
+		username() {
+			return this.$store.state.username
 		}
 	},
 	methods: {
@@ -96,7 +99,12 @@ export default {
 						choice: this.choices[this.chosenIndex]
 					}))
 				} else {
-					// todo...send user info with choice
+					console.log('sending response')
+
+					this.$socket.emit('sendResponseData', this.encrypt({
+						choice: this.choices[this.chosenIndex],
+						student: this.username
+					}))
 				}
 
 				// attempt to prevent multiple attempts
