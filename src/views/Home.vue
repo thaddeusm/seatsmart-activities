@@ -14,7 +14,7 @@
 				<span v-if="possibleNames.length == 2">...</span>
 			</section>
 			<section id="usernameArea" v-if="mode == 'chart' && !nameConfirmed">
-				<input type="text" v-model="username">
+				<input type="text" v-model="username" placeholder="Search for your name...">
 				<button id="confirmButton" @click="confirmName" :disabled="selectedName.shortName == ''">Connect</button>
 			</section>
 			<h4 v-if="!loading && nameConfirmed || mode == 'anonymously'">Waiting for activity to begin...</h4>
@@ -116,6 +116,9 @@ export default {
 
             return JSON.parse(decrypted)
         },
+        encrypt(data) {
+            return sjcl.encrypt(this.room, JSON.stringify(data))
+        },
         startActivity() {
         	if (!this.activityAlreadyCompleted(this.room)) {
         		let scope = this
@@ -153,7 +156,7 @@ export default {
     		this.$store.dispatch('setUsername', this.selectedName)
     		this.nameConfirmed = true
     		this.$socket.emit('checkActivityStatus', this.room)
-    		this.$socket.emit('sendingUsername', this.selectedName.shortName)
+    		this.$socket.emit('sendingUsername', this.encrypt(this.selectedName.fullName))
     	}
 	},
 	mounted() {
@@ -201,9 +204,16 @@ main {
 	height: 5em;
 	animation-name: spin;
 	animation-iteration-count: infinite;
-	animation-duration: 1.5s;
+	animation-duration: 3s;
 	animation-timing-function: ease-in-out;
-	animation-delay: .5s;
+	animation-delay: 1s;
+}
+
+#illustration {
+	background: var(--light-gray);
+	padding: 5px;
+	border-radius: 2px;
+	animation-delay: 0s;
 }
 
 h4 {
