@@ -13,7 +13,7 @@ export default new Router({
           name: 'home',
           component: Home,
           props: (route) => ({
-              room: route.query.room,
+              room: route.query.room
           })
         },
         {
