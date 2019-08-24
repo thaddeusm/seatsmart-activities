@@ -210,10 +210,10 @@ main {
 }
 
 #illustration {
+	height: 150px;
 	background: var(--light-gray);
 	padding: 5px;
 	border-radius: 2px;
-	animation-delay: 0s;
 }
 
 h4 {
