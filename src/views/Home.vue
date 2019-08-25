@@ -13,7 +13,7 @@
 				</button>
 				<span v-if="possibleNames.length == 2">...</span>
 			</section>
-			<section id="usernameArea" v-if="mode == 'chart' && !nameConfirmed">
+			<section id="usernameArea" v-if="mode !== 'anonymously' && !nameConfirmed">
 				<input type="text" v-model="username" placeholder="Search for your name...">
 				<button id="confirmButton" @click="confirmName" :disabled="selectedName.shortName == ''">Connect</button>
 			</section>
