@@ -140,15 +140,16 @@ export default {
 	display: grid;
 	width: 100%;
 	height: 100%;
-	grid-template-rows: 5% 1fr;
+	grid-template-rows: 5% 1fr 5%;
 	grid-template-areas: 
 		"header"
-		"main";
+		"main"
+		"footer";
 }
 
 header {
 	grid-area: header;
-	background: var(--gray);
+	background: var(--light-gray);
 }
 
 .split-header {
@@ -163,12 +164,12 @@ header {
 	grid-area: activityIcon;
 	display: block;
 	margin: 0 auto;
-	max-height: 150px;
+	max-height: 125px;
 }
 
 #countdown {
 	grid-area: countdown;
-	color: var(--yellow);
+	color: var(--black);
 	text-align: center;
 }
 
@@ -196,6 +197,10 @@ h2 {
 
 .selected {
 	border: 3px solid var(--yellow);
+}
+
+footer {
+	grid-area: footer;
 }
 
 .submit-button {
