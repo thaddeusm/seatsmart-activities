@@ -140,7 +140,7 @@ export default {
 	display: grid;
 	width: 100%;
 	height: 100vh;
-	grid-template-rows: 7% 1fr 10%;
+	grid-template-rows: 20% 1fr 25%;
 	grid-template-areas: 
 		"header"
 		"main"
