@@ -165,6 +165,7 @@ header {
 	grid-area: activityIcon;
 	display: block;
 	margin: 0 auto;
+	height: auto;
 	max-height: 125px;
 }
 
