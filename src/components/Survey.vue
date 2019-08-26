@@ -139,12 +139,13 @@ export default {
 .container {
 	display: grid;
 	width: 100%;
-	height: 100%;
-	grid-template-rows: 5% 1fr 5%;
+	height: 100vh;
+	grid-template-rows: auto 1fr auto;
 	grid-template-areas: 
 		"header"
 		"main"
 		"footer";
+	align-items: center;
 }
 
 header {
@@ -180,7 +181,7 @@ main {
 h2 {
 	color: var(--white);
 	text-align: center;
-	margin: 50px auto 15px auto;
+	margin: 50px auto 30px auto;
 	padding: 0 10px;
 }
 
@@ -188,8 +189,9 @@ h2 {
 	display: block;
 	background: var(--light-gray);
 	width: 90%;
+	max-width: 350px;
 	padding: 10px;
-	margin: 20px auto;
+	margin: 10px auto;
 	font-size: 1.1em;
 	border: 3px solid var(--black);
 	text-align: left;
@@ -209,7 +211,7 @@ footer {
 	border-radius: 5px;
 	cursor: pointer;
 	border: 1px solid var(--gray);
-	margin: 30px auto;
+	margin: 50px auto;
   	display: block;
   	outline: none;
   	background: var(--yellow);
