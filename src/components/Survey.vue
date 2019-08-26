@@ -166,7 +166,7 @@ header {
 	display: block;
 	margin: 0 auto;
 	height: auto;
-	max-height: 125px;
+	max-height: 100px;
 }
 
 #countdown {
