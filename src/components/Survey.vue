@@ -163,7 +163,7 @@ header {
 
 #activityIcon {
 	grid-area: activityIcon;
-	height: auto;
+	height: 100%;
 	max-height: 100px;
 }
 
