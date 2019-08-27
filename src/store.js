@@ -10,7 +10,7 @@ export default new Vuex.Store({
 		activityType: '',
 		activityData: '',
 		activityDate: {},
-		mode: '',
+		mode: 'anonymously',
 		activityComplete: false,
 		students: [],
 		username: {
