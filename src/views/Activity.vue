@@ -1,16 +1,19 @@
 <template>
 	<div>
 		<Survey v-if="activityType == 'survey'" /> 
+		<ResponsePool v-else />
 	</div>
 </template>
 
 <script>
 import Survey from '@/components/Survey.vue'
+import ResponsePool from '@/components/ResponsePool.vue'
 
 export default {
 	name: 'Activity',
 	components: {
-		Survey
+		Survey,
+		ResponsePool
 	},
 	computed: {
 		activityType() {

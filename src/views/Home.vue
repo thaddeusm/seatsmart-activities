@@ -3,7 +3,8 @@
 		<header>
 			<transition name="fade" mode="out-in">
 				<img ref="logo" v-if="loading" src="@/assets/activities-circle.svg" alt="activities logo" id="logo" key="logo">
-				<img ref="illustration" v-else src="@/assets/survey-illustration.svg" alt="survey illustration" id="illustration" key="illustration">
+				<img ref="illustration" v-else-if="activityType == 'survey'" src="@/assets/survey-illustration.svg" alt="survey illustration" id="illustration" key="illustration">
+				<img ref="illustration" v-else-if="activityType == 'response pool'" src="@/assets/response-pool-illustration.svg" alt="illustration" id="illustration" key="illustration">
 			</transition>
 		</header>
 		<main>

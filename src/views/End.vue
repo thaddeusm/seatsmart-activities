@@ -2,6 +2,7 @@
 	<div class="container">
 		<header>
 			<img v-if="activityType == 'survey'" src="@/assets/survey-illustration.svg" alt="survey illustration">
+			<img v-else src="@/assets/response-pool-illustration.svg" alt="response pool illustration">
 		</header>
 		<main>
 			<h2>{{ activityType }} complete</h2>
