@@ -4,7 +4,7 @@
 			<img v-if="activityType == 'survey'" src="@/assets/survey-illustration.svg" alt="survey illustration">
 		</header>
 		<main>
-			<h2>{{ activityType }} canceled</h2>
+			<h2>{{ activityType }} closed</h2>
 		</main>
 	</div>
 </template>
