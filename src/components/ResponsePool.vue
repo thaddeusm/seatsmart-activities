@@ -148,7 +148,7 @@ export default {
 	display: grid;
 	width: 100%;
 	height: 100vh;
-	grid-template-rows: 20% 1fr 25%;
+	grid-template-rows: auto 1fr 25%;
 	grid-template-areas: 
 		"header"
 		"main"
@@ -163,7 +163,7 @@ header {
 
 .split-header {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 30%;
 	grid-template-areas: "activityIcon countdown";
 	align-items: center;
 	justify-content: center;
@@ -171,7 +171,7 @@ header {
 
 #activityIcon {
 	grid-area: activityIcon;
-	height: 100%;
+	height: 130px;
 }
 
 #countdown {
