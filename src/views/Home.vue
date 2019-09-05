@@ -205,9 +205,9 @@ main {
 	height: 5em;
 	animation-name: spin;
 	animation-iteration-count: infinite;
-	animation-duration: 3s;
+	animation-duration: 2s;
 	animation-timing-function: ease-in-out;
-	animation-delay: 1s;
+	animation-delay: .5s;
 }
 
 #illustration {
@@ -271,7 +271,7 @@ h4 {
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+  transition: opacity .2s;
 }
 
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
