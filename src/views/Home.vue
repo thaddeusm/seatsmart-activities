@@ -164,6 +164,8 @@ export default {
 		if (this.room) {
 			this.$store.dispatch('setRoomID', this.room)
 			this.$socket.emit('joinActivityRoom', this.room)
+		} else {
+			this.$router.push('/code')
 		}
 	}
 }
