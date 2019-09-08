@@ -7,14 +7,19 @@
 				v-if="timeLimitEnabled"
 				:countdownRunning="started"
 				:timeLimit="timeLimitInSeconds"
-				v-on:countdown-ended="sendResponseAndEnd" 
+				v-on:countdown-ended="endResponsePool" 
 			/>
 		</header>
 		<main>
-			<h2>
-				{{ prompt }}
-			</h2>
-			<input type="text" v-model="response" :placeholder="example" @keyup.enter="handleKeyup">
+			<div v-if="waitingForReceipt" id="loader">
+				<img ref="logo"src="@/assets/activities-circle.svg" alt="activities logo" id="logo" key="logo">
+			</div>
+			<div v-else>
+				<h2>
+					{{ prompt }}
+				</h2>
+				<input type="text" v-model="response" :placeholder="example" @keyup.enter="handleKeyup">
+			</div>
 		</main>
 		<footer>
 			<button :class="[allowMultipleResponses ? 'end-button' : 'submit-button']" @click="sendResponseAndEnd" :disabled="response == ''">
@@ -28,8 +33,6 @@
 </template>
 
 <script>
-import sjcl from 'sjcl'
-
 import Countdown from '@/components/Countdown.vue'
 
 export default {
@@ -37,11 +40,15 @@ export default {
 	components: {
 		Countdown
 	},
+	props: {
+		waitingForReceipt: Boolean
+	},
 	data() {
 		return {
 			started: false,
 			chosenIndex: null,
-			response: ''
+			response: '',
+			end: false
 		}
 	},
 	computed: {
@@ -85,6 +92,13 @@ export default {
 			return this.$store.state.username
 		}
 	},
+	watch: {
+		waitingForReceipt(newValue, oldValue) {
+			if (newValue == false && this.end) {
+				this.endResponsePool()
+			}
+		}
+	},
 	methods: {
 		sendResponse() {
 			// send response to host if a real session
@@ -92,16 +106,16 @@ export default {
 				if (this.mode == 'anonymously') {
 					console.log('sending response')
 
-					this.$socket.emit('sendResponseData', this.encrypt({
+					this.$emit('send-response', {
 						response: this.response
-					}))
+					})
 				} else {
 					console.log('sending response')
 
-					this.$socket.emit('sendResponseData', this.encrypt({
+					this.$emit('send-response', {
 						response: this.response,
 						student: this.username
-					}))
+					})
 				}
 			}
 
@@ -109,7 +123,10 @@ export default {
 		},
 		sendResponseAndEnd() {
 			this.sendResponse()
-
+			this.end = true
+		},
+		endResponsePool() {
+			// end activity
 			console.log('response pool ended')
 
 			this.$store.dispatch('setActivityComplete')
@@ -117,7 +134,7 @@ export default {
 			this.$router.push('/end')
 
 			// attempt to prevent multiple attempts
-			this.saveToStorage()
+			this.saveToStorage()			
 		},
 		handleKeyup() {
 			if (this.allowMultipleResponses) {
@@ -128,10 +145,7 @@ export default {
 		},
 		saveToStorage() {
     		localStorage.setItem(this.roomID, JSON.stringify({completed: true, date: this.date}))
-    	},
-    	encrypt(data) {
-            return sjcl.encrypt(this.roomID, JSON.stringify(data))
-        }
+    	}
 	},
 	created() {
 		let scope = this
@@ -180,6 +194,19 @@ header {
 	text-align: center;
 }
 
+#loader {
+	text-align: center;
+}
+
+#logo {
+	height: 5em;
+	animation-name: spin;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+	animation-delay: .5s;
+}
+
 main {
 	grid-area: main;
 }
@@ -223,5 +250,10 @@ footer {
 	margin: 0 10px;
   	outline: none;
   	background: var(--light-gray);
+}
+
+@keyframes spin {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(360deg);}
 }
 </style>

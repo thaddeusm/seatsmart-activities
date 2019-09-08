@@ -11,17 +11,22 @@
 			/>
 		</header>
 		<main>
-			<h2>
-				{{ prompt }}
-			</h2>
-			<button 
-				v-for="(choice, index) in choices" 
-				:class="[chosenIndex == index ? 'selected':'' , 'choice-button']" 
-				@click="markChoice(index)"
-				:key="`choice${index}`"
-			>
-				{{ choice }}
-			</button>
+			<div v-if="waitingForReceipt" id="loader">
+				<img ref="logo"src="@/assets/activities-circle.svg" alt="activities logo" id="logo" key="logo">
+			</div>
+			<div v-else>
+				<h2>
+					{{ prompt }}
+				</h2>
+				<button 
+					v-for="(choice, index) in choices" 
+					:class="[chosenIndex == index ? 'selected':'' , 'choice-button']" 
+					@click="markChoice(index)"
+					:key="`choice${index}`"
+				>
+					{{ choice }}
+				</button>
+			</div>
 		</main>
 		<footer>
 			<button class="submit-button" @click="endSurvey">
@@ -40,6 +45,9 @@ export default {
 	name: 'survey',
 	components: {
 		Countdown
+	},
+	props: {
+		waitingForReceipt: Boolean
 	},
 	data() {
 		return {
@@ -85,35 +93,41 @@ export default {
 			return this.$store.state.username
 		}
 	},
+	watch: {
+		waitingForReceipt(newValue, oldValue) {
+			if (this.chosenIndex !== null) {
+				if (!newValue) {
+					// end activity
+					this.$store.dispatch('setActivityComplete')
+
+					this.$router.push('/end')
+
+					// attempt to prevent multiple attempts
+					this.saveToStorage()
+				}
+			}
+		}
+	},
 	methods: {
 		endSurvey() {
-			console.log('survey ended')
-
 			// send response to host if a real session
-
 			if (this.mode !== 'preview') {
 				if (this.mode == 'anonymously') {
 					console.log('sending response')
 
-					this.$socket.emit('sendResponseData', this.encrypt({
+					this.$emit('send-response', {
 						choice: this.choices[this.chosenIndex]
-					}))
+					})
 				} else {
 					console.log('sending response')
 
-					this.$socket.emit('sendResponseData', this.encrypt({
+					this.$emit('send-response', {
 						choice: this.choices[this.chosenIndex],
 						student: this.username
-					}))
+					})
+
 				}
-
-				// attempt to prevent multiple attempts
-				this.saveToStorage()
 			}
-
-			this.$store.dispatch('setActivityComplete')
-
-			this.$router.push('/end')
 		},
 		markChoice(index) {
 			this.chosenIndex = index
@@ -173,6 +187,19 @@ header {
 	text-align: center;
 }
 
+#loader {
+	text-align: center;
+}
+
+#logo {
+	height: 5em;
+	animation-name: spin;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+	animation-delay: .5s;
+}
+
 main {
 	grid-area: main;
 }
@@ -214,5 +241,10 @@ footer {
   	display: block;
   	outline: none;
   	background: var(--yellow);
+}
+
+@keyframes spin {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(360deg);}
 }
 </style>

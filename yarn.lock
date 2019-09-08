@@ -6451,6 +6451,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
+simple-id@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/simple-id/-/simple-id-1.0.0.tgz#63dccdbb9c7fe8ebef545398d813d6ca8135acfc"
+  integrity sha1-Y9zNu5x/6OvvVFOY2BPWyoE1rPw=
+
 simple-swizzle@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
