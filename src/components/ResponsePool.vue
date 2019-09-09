@@ -18,7 +18,7 @@
 				<h2>
 					{{ prompt }}
 				</h2>
-				<input type="text" v-model="response" :placeholder="example" @keyup.enter="handleKeyup">
+				<input type="text" v-model="response" :placeholder="example" @keyup.enter="handleKeyup" ref="input">
 			</div>
 		</main>
 		<footer>
@@ -96,6 +96,12 @@ export default {
 		waitingForReceipt(newValue, oldValue) {
 			if (newValue == false && this.end) {
 				this.endResponsePool()
+			} else if (newValue == false) {
+				let scope = this
+
+				setTimeout(function() {
+					scope.$refs.input.focus()
+				}, 1000, scope)
 			}
 		}
 	},
@@ -153,6 +159,9 @@ export default {
 		setTimeout(function() {
 			scope.started = true
 		}, 1000, scope)
+	},
+	mounted() {
+		this.$refs.input.focus()
 	}
 }
 </script>
