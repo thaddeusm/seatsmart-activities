@@ -80,7 +80,7 @@ export default {
 			this.$socket.emit('rejoinActivityRoom', this.room)
 		},
 		rejoinedActivityRoom() {
-			this.pendingResponse = null
+			this.retrySendResponse()
 		},
 		activityCanceled() {
 			this.$router.push('/cancel')

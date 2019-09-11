@@ -102,8 +102,6 @@ export default {
 			if (newValue == false && this.end) {
 				this.endResponsePool()
 			} else if (newValue == false) {
-				this.response = ''
-
 				let scope = this
 
 				setTimeout(function() {
