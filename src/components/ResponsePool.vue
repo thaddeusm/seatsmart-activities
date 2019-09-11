@@ -129,6 +129,8 @@ export default {
 					})
 				}
 			}
+
+			this.response = ''
 		},
 		sendResponseAndEnd() {
 			this.sendResponse()
