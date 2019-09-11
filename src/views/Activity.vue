@@ -74,14 +74,13 @@ export default {
 	},
 	sockets: {
 		disconnect() {
-			alert('disconnected')
+			
 		},
 		reconnect() {
 			this.$socket.emit('rejoinActivityRoom', this.room)
 		},
 		rejoinedActivityRoom() {
-			alert('rejoined room')
-			this.retrySendResponse()
+			this.pendingResponse = null
 		},
 		activityCanceled() {
 			this.$router.push('/cancel')
