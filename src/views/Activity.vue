@@ -75,13 +75,11 @@ export default {
 	sockets: {
 		disconnect() {
 			alert('disconnected')
-			this.$socket.emit('rejoinActivityRoom', this.room)
 		},
 		reconnect() {
-			this.retrySendResponse()
+			this.$socket.emit('rejoinActivityRoom', this.room)
 		},
 		rejoinedActivityRoom() {
-			console.log('rejoined room')
 			alert('rejoined room')
 			this.retrySendResponse()
 		},
