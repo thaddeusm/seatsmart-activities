@@ -8,6 +8,7 @@
 		<ResponsePool 
 			v-else 
 			v-on:send-response="sendResponse"
+			v-on:retry="retrySendResponse"
 			:waitingForReceipt="pendingResponse !== null"
 		/>
 	</div>
@@ -56,6 +57,12 @@ export default {
 			this.$socket.emit('sendResponseData', this.encrypt(obj))
 			this.pendingResponse = obj
 		},
+		retrySendResponse() {
+			// try to resend pending response
+			if (this.pendingResponse !== null) {
+				this.$socket.emit('sendResponseData', this.encrypt(this.pendingResponse))
+			}
+		},
 		encrypt(data) {
             return sjcl.encrypt(this.room, JSON.stringify(data))
         },
@@ -67,15 +74,16 @@ export default {
 	},
 	sockets: {
 		disconnect() {
+			alert('disconnected')
 			this.$socket.emit('rejoinActivityRoom', this.room)
+		},
+		reconnect() {
+			this.retrySendResponse()
 		},
 		rejoinedActivityRoom() {
 			console.log('rejoined room')
-
-			// try to resend pending response
-			if (this.pendingResponse !== null) {
-				this.$socket.emit('sendResponseData', this.encrypt(this.pendingResponse))
-			}
+			alert('rejoined room')
+			this.retrySendResponse()
 		},
 		activityCanceled() {
 			this.$router.push('/cancel')

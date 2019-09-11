@@ -27,12 +27,14 @@ export default new Vuex.Store({
 			state.roomJoined = true
 		},
 		setActivityData(state, data) {
-			state.activityType = data.activityType
-			state.activityData = data.activityData
-			state.mode = data.activityMode
-			state.activityDate = data.activityDate.split('T')[0]
-			if (data.students) {
-				state.students = data.students
+			if (state.activityData == '') {
+				state.activityType = data.activityType
+				state.activityData = data.activityData
+				state.mode = data.activityMode
+				state.activityDate = data.activityDate.split('T')[0]
+				if (data.students) {
+					state.students = data.students
+				}
 			}
 		},
 		setActivityComplete(state) {

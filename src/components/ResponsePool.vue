@@ -21,12 +21,17 @@
 				<input type="text" v-model="response" :placeholder="example" @keyup.enter="handleKeyup" ref="input">
 			</div>
 		</main>
-		<footer>
+		<footer v-if="!waitingForReceipt">
 			<button :class="[allowMultipleResponses ? 'end-button' : 'submit-button']" @click="sendResponseAndEnd" :disabled="response == ''">
 				finish
 			</button>
 			<button v-if="allowMultipleResponses" class="submit-button" @click="sendResponse" :disabled="response == ''">
 				submit
+			</button>
+		</footer>
+		<footer v-else>
+			<button class="submit-button" @click="$emit('retry')">
+				retry
 			</button>
 		</footer>
 	</div>
