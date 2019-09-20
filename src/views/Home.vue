@@ -183,7 +183,6 @@ export default {
 .container {
 	width: 100%;
 	height: 100%;
-	min-height: 100vh;
 	display: grid;
 	grid-template-rows: 40vh 1fr;
 	grid-template-areas: 

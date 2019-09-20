@@ -32,6 +32,11 @@ html, body {
     background: var(--black);
 }
 
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
 h1 {
     font-family: "ArchivoNarrow";
     -webkit-user-select: none;
