@@ -87,8 +87,8 @@ export default {
 
 <style scoped>
 main {
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	display: grid;
 	justify-content: center;
 	align-items: center;
