@@ -91,7 +91,13 @@ export default {
 			}
 		},
 		allowActivityStart() {
-			this.startActivity()
+			if (this.mode !== 'anonymously') {
+				if (this.nameConfirmed) {
+					this.startActivity()
+				}
+			} else {
+				this.startActivity()
+			}
 		},
 		disconnect() {
 			this.$socket.emit('rejoinActivityRoom', this.room)
