@@ -23,10 +23,9 @@ export default {
 
 <style scoped>
 .container {
-	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	display: grid;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 50% 50%;
 	grid-template-areas: 
 		"header"
 		"main";

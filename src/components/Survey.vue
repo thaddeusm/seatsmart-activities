@@ -151,10 +151,9 @@ export default {
 
 <style scoped>
 .container {
+	height: 100%;
 	display: grid;
-	width: 100%;
-	height: 100vh;
-	grid-template-rows: auto 1fr 25%;
+	grid-template-rows: auto 70% auto;
 	grid-template-areas: 
 		"header"
 		"main"

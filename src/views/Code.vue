@@ -87,13 +87,12 @@ export default {
 
 <style scoped>
 main {
-	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	display: grid;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	grid-template-rows: 30% 1fr;
+	grid-template-rows: 30% 70%;
 	grid-template-areas: 
 		"instructions"
 		"form";

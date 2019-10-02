@@ -187,10 +187,9 @@ export default {
 }
 
 .container {
-	width: 100%;
 	height: 100%;
 	display: grid;
-	grid-template-rows: 40vh 1fr;
+	grid-template-rows: 40% 60%;
 	grid-template-areas: 
 		"header"
 		"main";

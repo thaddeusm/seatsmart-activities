@@ -4,6 +4,10 @@
     </div>
 </template>
 
+<script>
+
+</script>
+
 <style>
 * {
     margin: 0;
@@ -19,6 +23,7 @@
     --gray: #6C6C6C;
     --light-gray: #E5E5E5;
     --white: #FFFFFF;
+    --vh: 1vh;
 }
 
 /* custom text highlight color */
@@ -26,15 +31,10 @@
     background: var(--yellow);
 }
 
-html, body {
+html, body, #app {
     width: 100%;
     height: 100%;
     background: var(--black);
-}
-
-body {
-    height: 100vh;
-    width: 100vw;
 }
 
 h1 {
@@ -156,6 +156,5 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-overflow-scrolling: touch;
-    min-height: 100vh;
 }
 </style>
