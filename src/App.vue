@@ -39,7 +39,6 @@ html, body, #app {
 
 h1 {
     font-family: "ArchivoNarrow";
-    -webkit-user-select: none;
     font-weight: 400;
     font-size: 2em;
 }
@@ -47,52 +46,44 @@ h1 {
 h2 {
     font-family: "ArchivoNarrow";
     font-weight: 400;
-    -webkit-user-select: none;
     font-size: 1.7em;
 }
 
 h3 {
     font-family: "ArchivoNarrow";
     font-weight: 500;
-    -webkit-user-select: none;
     font-size: 1.5em;
 }
 
 h4 {
     font-family: "ArchivoNarrow";
     font-weight: 400;
-    -webkit-user-select: none;
     font-size: 1.3em;
 }
 
 h5 {
     font-family: "ArchivoNarrow";
     font-weight: 400;
-    -webkit-user-select: none;
     font-size: 1.2em;
 }
 
 h6 {
     font-family: "ArchivoNarrow";
     font-weight: 400;
-    -webkit-user-select: none;
     font-size: 1.1em;
 }
 
 p {
-    -webkit-user-select: none;
     font-family: "ArchivoNarrow";
     font-size: 1em;
     line-height: 1.5;
 }
 
 span {
-    -webkit-user-select: none;
     font-family: "ArchivoNarrow";
 }
 
 li {
-    -webkit-user-select: none;
     font-family: "ArchivoNarrow";
 }
 
@@ -120,7 +111,6 @@ input[type=text] {
 }
 
 button {
-    -webkit-user-select: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-border-radius: none;
@@ -132,12 +122,10 @@ button {
 }
 
 a {
-    -webkit-user-select: none;
     font-family: "ArchivoNarrow";
 }
 
 img {
-    -webkit-user-select: none;
 }
 
 input {
