@@ -164,12 +164,29 @@ export default {
     		this.nameConfirmed = true
     		this.$socket.emit('checkActivityStatus', this.room)
     		this.$socket.emit('sendingUsername', this.encrypt(this.selectedName.fullName))
+    		this.saveUserInfoToStorage()
+    	},
+    	checkForStoredUserInfo() {
+    		let userInfo = localStorage.getItem('student')
+
+    		if (userInfo !== null) {
+    			let parsed = JSON.parse(userInfo)
+
+    			console.log('Found student record in localStorage: ', parsed)
+
+    			this.setName(parsed)
+    		}
+    	},
+    	saveUserInfoToStorage() {
+    		localStorage.setItem('student', JSON.stringify(this.selectedName))
     	}
 	},
 	mounted() {
 		if (this.room) {
 			this.$store.dispatch('setRoomID', this.room)
 			this.$socket.emit('joinActivityRoom', this.room)
+
+			this.checkForStoredUserInfo()
 		} else {
 			this.$router.push('/code')
 		}
