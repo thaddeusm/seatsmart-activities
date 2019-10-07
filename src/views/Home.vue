@@ -36,7 +36,8 @@ export default {
 			username: '',
 			selectedName: {
 				shortName: '',
-				fullName: {}
+				fullName: {},
+				id: ''
 			},
 			nameConfirmed: false
 		}
@@ -54,8 +55,11 @@ export default {
 		date() {
 			return this.$store.state.activityDate
 		},
+		students() {
+			return this.$store.state.students
+		},
 		possibleNames() {
-			let allNames = this.$store.state.students
+			let allNames = this.students
 
 			let filteredNames = allNames.filter(student => {
 				return student.firstName.toLowerCase().includes(this.username.toLowerCase())
@@ -64,7 +68,8 @@ export default {
 			let arr = filteredNames.map(student => {
 				return {
 					shortName:`${student.firstName} ${student.lastName[0]}${student.lastName[1]}.`,
-					fullName: student
+					fullName: student,
+					id: student.id
 				}
 			})
 
@@ -89,6 +94,12 @@ export default {
 			if (this.mode == 'preview') {
 				this.startActivity()
 			}
+
+			let scope = this
+
+			setTimeout(function() {
+				scope.checkForStoredUserInfo()
+			}, 1000, scope)
 		},
 		allowActivityStart() {
 			if (this.mode !== 'anonymously') {
@@ -167,26 +178,30 @@ export default {
     		this.saveUserInfoToStorage()
     	},
     	checkForStoredUserInfo() {
-    		let userInfo = localStorage.getItem('student')
+    		let students = this.students
 
-    		if (userInfo !== null) {
-    			let parsed = JSON.parse(userInfo)
+    		for (let i=0; i<students.length; i++) {
+    			let student = students[i].id
+    			let userInfo = localStorage.getItem(student)
 
-    			console.log('Found student record in localStorage: ', parsed)
+    			if (userInfo !== null) {
+	    			let parsed = JSON.parse(userInfo)
 
-    			this.setName(parsed)
+	    			console.log('Found student record in localStorage: ', parsed)
+
+	    			this.setName(parsed)
+	    			break
+	    		}
     		}
     	},
     	saveUserInfoToStorage() {
-    		localStorage.setItem('student', JSON.stringify(this.selectedName))
+    		localStorage.setItem(this.selectedName.id, JSON.stringify(this.selectedName))
     	}
 	},
 	mounted() {
 		if (this.room) {
 			this.$store.dispatch('setRoomID', this.room)
 			this.$socket.emit('joinActivityRoom', this.room)
-
-			this.checkForStoredUserInfo()
 		} else {
 			this.$router.push('/code')
 		}
