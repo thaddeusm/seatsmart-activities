@@ -186,6 +186,7 @@ export default {
 header {
 	grid-area: header;
 	background: var(--light-gray);
+	text-align: center;
 }
 
 .split-header {
