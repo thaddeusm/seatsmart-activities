@@ -236,7 +236,7 @@ footer {
 	border-radius: 5px;
 	cursor: pointer;
 	border: 1px solid var(--gray);
-	margin: 0 auto;
+	margin: 15px auto;
   	display: block;
   	outline: none;
   	background: var(--yellow);

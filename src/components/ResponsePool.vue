@@ -250,7 +250,7 @@ footer {
 	border-radius: 5px;
 	cursor: pointer;
 	border: 1px solid var(--gray);
-	margin: 0 10px;
+	margin: 15px 10px;
   	outline: none;
   	background: var(--yellow);
 }
@@ -261,7 +261,7 @@ footer {
 	border-radius: 5px;
 	cursor: pointer;
 	border: 1px solid var(--gray);
-	margin: 0 10px;
+	margin: 15px 10px;
   	outline: none;
   	background: var(--light-gray);
 }
