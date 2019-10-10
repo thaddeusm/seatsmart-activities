@@ -112,7 +112,6 @@ export default {
 			}
 
 			this.checkModels()
-
 		},
 		checkModels() {
 			if (this.first.length > 1) {
