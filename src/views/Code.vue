@@ -105,6 +105,8 @@ export default {
 
 			if (pressedKey == 'Delete' || pressedKey == 'Backspace') {
 				// handle delete
+			} else if (pressedKey == 'Enter' && el == 'fourth') {
+				this.startRoomEntry()
 			} else if (this.$refs[el].value !== '') {
 				this.$refs[destination].focus()
 			}
