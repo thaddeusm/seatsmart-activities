@@ -18,7 +18,7 @@
 				<h2>
 					{{ prompt }}
 				</h2>
-				<input type="text" v-model="response" :placeholder="example" @keyup.enter="handleKeyup" ref="input">
+				<textarea v-model="response" :placeholder="example" @keyup.enter="handleKeyup" ref="input"></textarea>
 			</div>
 		</main>
 		<footer v-if="!waitingForReceipt">
@@ -232,11 +232,12 @@ h2 {
 	padding: 0 10px;
 }
 
-input[type=text] {
+textarea {
 	display: block;
 	margin: 0 auto;
 	width: 90%;
 	max-width: 250px;
+	height: 150px;
 }
 
 footer {

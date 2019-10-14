@@ -97,7 +97,7 @@ input[type=text], input[type=button] {
     font-family: "ArchivoNarrow";
 }
 
-input[type=text] {
+input[type=text], textarea {
 	border-radius: 4px;
 	font-size: 1.3em;
 	padding: 7px 10px;
