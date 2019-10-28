@@ -3,8 +3,8 @@
 		<header>
 			<transition name="fade" mode="out-in">
 				<img ref="logo" v-if="loading" src="@/assets/activities-circle.svg" alt="activities logo" id="logo" key="logo">
-				<img ref="illustration" v-else-if="activityType == 'survey'" src="@/assets/survey-illustration.svg" alt="survey illustration" id="illustration" key="illustration">
-				<img ref="illustration" v-else-if="activityType == 'response pool'" src="@/assets/response-pool-illustration.svg" alt="illustration" id="illustration" key="illustration">
+				<SurveyIllustration width="280" v-else-if="activityType == 'survey'" id="illustration" />
+				<ResponsePoolIllustration width="280" v-else-if="activityType == 'response pool'" id="illustration" />
 			</transition>
 		</header>
 		<main>
@@ -25,11 +25,17 @@
 
 <script>
 import sjcl from 'sjcl'
+import SurveyIllustration from '@/components/SurveyIllustration.vue'
+import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
 
 export default {
 	name: 'Home',
 	props: {
 		room: String
+	},
+	components: {
+		SurveyIllustration,
+		ResponsePoolIllustration
 	},
 	data() {
 		return {
@@ -249,7 +255,6 @@ main {
 }
 
 #illustration {
-	height: 150px;
 	background: var(--light-gray);
 	padding: 5px;
 	border-radius: 2px;

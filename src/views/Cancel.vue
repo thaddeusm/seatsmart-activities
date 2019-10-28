@@ -1,8 +1,8 @@
 <template>
 	<div class="container">
 		<header>
-			<img v-if="activityType == 'survey'" src="@/assets/survey-illustration.svg" alt="survey illustration">
-			<img v-else src="@/assets/response-pool-illustration.svg" alt="response pool illustration">
+			<SurveyIllustration width="280" v-if="activityType == 'survey'" id="illustration" />
+			<ResponsePoolIllustration width="280" v-else id="illustration" />
 		</header>
 		<main>
 			<h2>{{ activityType }} closed</h2>
@@ -11,8 +11,15 @@
 </template>
 
 <script>
+import SurveyIllustration from '@/components/SurveyIllustration.vue'
+import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
+
 export default {
 	name: 'Cancel',
+	components: {
+		SurveyIllustration,
+		ResponsePoolIllustration
+	},
 	computed: {
 		activityType() {
 			return this.$store.state.activityType
@@ -36,6 +43,12 @@ export default {
 header {
 	grid-area: header;
 	align-self: center;
+}
+
+#illustration {
+	background: var(--light-gray);
+	padding: 5px;
+	border-radius: 2px;
 }
 
 main {

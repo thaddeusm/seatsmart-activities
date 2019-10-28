@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<header :class="[timeLimitEnabled ? 'split-header': '']">
-			<img src="@/assets/response-pool-illustration.svg" alt="response pool illustration" id="activityIcon">
+			<ResponsePoolIllustration width="250" id="activityIcon" />
 			<Countdown
 				id="countdown"  
 				v-if="timeLimitEnabled"
@@ -39,11 +39,13 @@
 
 <script>
 import Countdown from '@/components/Countdown.vue'
+import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
 
 export default {
 	name: 'survey',
 	components: {
-		Countdown
+		Countdown,
+		ResponsePoolIllustration
 	},
 	props: {
 		waitingForReceipt: Boolean
@@ -199,7 +201,6 @@ header {
 
 #activityIcon {
 	grid-area: activityIcon;
-	height: 130px;
 }
 
 #countdown {

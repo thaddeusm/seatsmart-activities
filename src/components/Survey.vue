@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<header :class="[timeLimitEnabled ? 'split-header': '']">
-			<img src="@/assets/survey-illustration.svg" alt="survey illustration" id="activityIcon">
+			<SurveyIllustration width="250" id="activityIcon" />
 			<Countdown
 				id="countdown"  
 				v-if="timeLimitEnabled"
@@ -40,11 +40,13 @@
 import sjcl from 'sjcl'
 
 import Countdown from '@/components/Countdown.vue'
+import SurveyIllustration from '@/components/SurveyIllustration.vue'
 
 export default {
 	name: 'survey',
 	components: {
-		Countdown
+		Countdown,
+		SurveyIllustration
 	},
 	props: {
 		waitingForReceipt: Boolean
@@ -177,7 +179,6 @@ header {
 
 #activityIcon {
 	grid-area: activityIcon;
-	height: 130px;
 }
 
 #countdown {
