@@ -151,7 +151,7 @@ export default {
 .container {
 	height: 100%;
 	display: grid;
-	grid-template-rows: auto 70% auto;
+	grid-template-rows: auto auto auto;
 	grid-template-areas: 
 		"header"
 		"main"
