@@ -24,9 +24,9 @@
 			</div>
 		</main>
 		<footer>
-			<button class="submit-button" @click="leaveInformationGap">
+			<!-- <button class="submit-button" @click="leaveInformationGap">
 				finish
-			</button>
+			</button> -->
 		</footer>
 	</div>
 </template>
