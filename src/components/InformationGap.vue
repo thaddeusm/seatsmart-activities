@@ -117,8 +117,12 @@ export default {
 			this.$router.push('/end')
 		},
 		setAssignment() {
-			if (this.assignByHighlight && this.mode !== 'anonymously') {
-				this.assignedIndex = this.$store.state.activityData.assignmentsByHighlight[this.highlight]
+			if (this.mode !== 'preview') {
+				if (this.assignByHighlight && this.mode !== 'anonymously') {
+					this.assignedIndex = this.$store.state.activityData.assignmentsByHighlight[this.highlight]
+				} else {
+					this.assignedIndex = Math.floor(Math.random() * this.assignments.length)
+				}
 			} else {
 				this.assignedIndex = Math.floor(Math.random() * this.assignments.length)
 			}
