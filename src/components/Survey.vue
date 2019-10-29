@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<header :class="[timeLimitEnabled ? 'split-header': '']">
-			<SurveyIllustration width="250" id="activityIcon" />
+			<SurveyIllustration width="230" id="activityIcon" />
 			<Countdown
 				id="countdown"  
 				v-if="timeLimitEnabled"
@@ -43,7 +43,7 @@ import Countdown from '@/components/Countdown.vue'
 import SurveyIllustration from '@/components/SurveyIllustration.vue'
 
 export default {
-	name: 'survey',
+	name: 'Survey',
 	components: {
 		Countdown,
 		SurveyIllustration

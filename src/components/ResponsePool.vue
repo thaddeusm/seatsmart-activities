@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<header :class="[timeLimitEnabled ? 'split-header': '']">
-			<ResponsePoolIllustration width="250" id="activityIcon" />
+			<ResponsePoolIllustration width="230" id="activityIcon" />
 			<Countdown
 				id="countdown"  
 				v-if="timeLimitEnabled"
@@ -42,7 +42,7 @@ import Countdown from '@/components/Countdown.vue'
 import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
 
 export default {
-	name: 'survey',
+	name: 'ResponsePool',
 	components: {
 		Countdown,
 		ResponsePoolIllustration
@@ -166,9 +166,6 @@ export default {
 		setTimeout(function() {
 			scope.started = true
 		}, 1000, scope)
-	},
-	mounted() {
-		this.$refs.input.focus()
 	}
 }
 </script>

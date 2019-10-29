@@ -6,9 +6,14 @@
 			:waitingForReceipt="pendingResponse !== null"
 		/> 
 		<ResponsePool 
-			v-else 
+			v-else-if="activityType == 'response pool'"
 			v-on:send-response="sendResponse"
 			v-on:retry="retrySendResponse"
+			:waitingForReceipt="pendingResponse !== null"
+		/>
+		<InformationGap 
+			v-else
+			v-on:send-response="sendResponse"
 			:waitingForReceipt="pendingResponse !== null"
 		/>
 	</div>
@@ -20,12 +25,14 @@ import simpleId from 'simple-id'
 
 import Survey from '@/components/Survey.vue'
 import ResponsePool from '@/components/ResponsePool.vue'
+import InformationGap from '@/components/InformationGap.vue'
 
 export default {
 	name: 'Activity',
 	components: {
 		Survey,
-		ResponsePool
+		ResponsePool,
+		InformationGap
 	},
 	data() {
 		return {
@@ -83,7 +90,9 @@ export default {
 			this.retrySendResponse()
 		},
 		activityCanceled() {
-			this.$router.push('/cancel')
+			if (this.activityType !== 'information gap') {
+				this.$router.push('/cancel')
+			}
 		},
 		responseReceiptConfirmed(encryptedResponse) {
 			let decrypted = this.decrypt(encryptedResponse)
@@ -94,7 +103,7 @@ export default {
 		}
 	},
 	mounted() {
-		if (this.activityComplete) {
+		if (this.activityComplete && this.activityType !== 'information gap') {
 			this.$router.push('/end')
 		}
 	}

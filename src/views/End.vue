@@ -2,7 +2,8 @@
 	<div class="container">
 		<header>
 			<SurveyIllustration width="280" v-if="activityType == 'survey'" id="illustration" />
-			<ResponsePoolIllustration width="280" v-else id="illustration" />
+			<ResponsePoolIllustration width="280" v-else-if="activityType == 'response pool'" id="illustration" />
+			<InformationGapIllustration width="280" v-else id="illustration" />
 		</header>
 		<main>
 			<h2>{{ activityType }} complete</h2>
@@ -13,12 +14,14 @@
 <script>
 import SurveyIllustration from '@/components/SurveyIllustration.vue'
 import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
+import InformationGapIllustration from '@/components/InformationGapIllustration.vue'
 
 export default {
 	name: 'End',
 	components: {
 		SurveyIllustration,
-		ResponsePoolIllustration
+		ResponsePoolIllustration,
+		InformationGapIllustration
 	},
 	computed: {
 		activityType() {

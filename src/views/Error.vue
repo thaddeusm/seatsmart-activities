@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<header>
-			<img src="@/assets/activities-circle.svg" alt="activities logo">
+			<ActivitiesCircle size="120" id="logo" />
 		</header>
 		<main>
 			<h2>Something is wrong.</h2>
@@ -11,8 +11,13 @@
 </template>
 
 <script>
+import ActivitiesCircle from '@/components/ActivitiesCircle.vue'
+
 export default {
-	name: 'Error'
+	name: 'Error',
+	components: {
+		ActivitiesCircle
+	}
 }
 </script>
 
@@ -20,7 +25,7 @@ export default {
 .container {
 	height: 100%;
 	display: grid;
-	grid-template-rows: 50% 50%;
+	grid-template-rows: 40% 60%;
 	grid-template-areas: 
 		"header"
 		"main";
@@ -38,11 +43,9 @@ main {
 	align-self: flex-start;
 }
 
-img {
-	height: 150px;
+#logo {
 	display: block;
 	margin: 0 auto;
-	padding: 5px;
 }
 
 h2 {

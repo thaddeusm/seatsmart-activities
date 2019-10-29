@@ -2,9 +2,10 @@
 	<div class="container">
 		<header>
 			<transition name="fade" mode="out-in">
-				<img ref="logo" v-if="loading" src="@/assets/activities-circle.svg" alt="activities logo" id="logo" key="logo">
+				<ActivitiesCircle size="120" v-if="loading" id="logo" />
 				<SurveyIllustration width="280" v-else-if="activityType == 'survey'" id="illustration" />
 				<ResponsePoolIllustration width="280" v-else-if="activityType == 'response pool'" id="illustration" />
+				<InformationGapIllustration width="280" v-else-if="activityType == 'information gap'" id="illustration" />
 			</transition>
 		</header>
 		<main>
@@ -25,8 +26,10 @@
 
 <script>
 import sjcl from 'sjcl'
+import ActivitiesCircle from '@/components/ActivitiesCircle.vue'
 import SurveyIllustration from '@/components/SurveyIllustration.vue'
 import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
+import InformationGapIllustration from '@/components/InformationGapIllustration.vue'
 
 export default {
 	name: 'Home',
@@ -34,8 +37,10 @@ export default {
 		room: String
 	},
 	components: {
+		ActivitiesCircle,
 		SurveyIllustration,
-		ResponsePoolIllustration
+		ResponsePoolIllustration,
+		InformationGapIllustration
 	},
 	data() {
 		return {
@@ -43,7 +48,8 @@ export default {
 			selectedName: {
 				shortName: '',
 				fullName: {},
-				id: ''
+				id: '',
+				highlight: ''
 			},
 			nameConfirmed: false
 		}
@@ -91,6 +97,7 @@ export default {
 			this.$store.dispatch('setRoomJoined')
 
 			this.$socket.emit('requestActivityData')
+			this.$socket.emit('checkActivityStatus', this.room)
 		},
 		incomingActivityData(data) {
 			let decrypted = this.decrypt(data)
@@ -246,7 +253,6 @@ main {
 }
 
 #logo {
-	height: 5em;
 	animation-name: spin;
 	animation-iteration-count: infinite;
 	animation-duration: 2s;

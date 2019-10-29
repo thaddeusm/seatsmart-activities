@@ -16,7 +16,8 @@ export default new Vuex.Store({
 		username: {
 			firstName: '',
 			lastName: '',
-			id: ''
+			id: '',
+			highlight: ''
 		}
 	},
 	mutations: {
