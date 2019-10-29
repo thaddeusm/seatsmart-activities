@@ -4,6 +4,11 @@
 			<InformationGapIllustration width="230" id="activityIcon" />
 		</header>
 		<main>
+			<div v-if="assignedIndex !== null">
+				<h2>
+					{{ prompt }}
+				</h2>
+			</div>
 			<div v-if="assignedIndex !== null" class="resource-display-area">
 				<p v-if="assignments[assignedIndex].resourceType == 'text'">
 					{{ assignments[assignedIndex].resourceData }}
@@ -200,7 +205,8 @@ p {
 }
 
 .resource-image {
-	max-width: 200px;
+	width: 100%;
+	max-width: 320px;
 }
 
 a {
