@@ -78,10 +78,20 @@ export default {
 			})
 
 			let arr = filteredNames.map(student => {
-				return {
-					shortName:`${student.firstName} ${student.lastName[0]}${student.lastName[1]}.`,
-					fullName: student,
-					id: student.id
+				if (student.highlight) {
+					return {
+						shortName:`${student.firstName} ${student.lastName[0]}${student.lastName[1]}.`,
+						fullName: student,
+						id: student.id,
+						highlight: student.highlight
+					}
+				} else {
+					return {
+						shortName:`${student.firstName} ${student.lastName[0]}${student.lastName[1]}.`,
+						fullName: student,
+						id: student.id,
+						highlight: '#E5E5E5'
+					}
 				}
 			})
 
@@ -191,7 +201,7 @@ export default {
     		this.saveUserInfoToStorage()
     	},
     	checkForStoredUserInfo() {
-    		let students = this.students
+    		let students = this.possibleNames
 
     		for (let i=0; i<students.length; i++) {
     			let student = students[i].id
