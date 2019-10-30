@@ -202,6 +202,7 @@ export default {
 
 	    			console.log('Found student record in localStorage: ', parsed)
 
+	    			console.log(students[i])
 	    			// ensure that most recent student info is used
 	    			this.setName(students[i])
 	    			break
