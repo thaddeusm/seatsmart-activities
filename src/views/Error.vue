@@ -24,7 +24,6 @@ export default {
 		},
 		routeToCodeView() {
 			let scope = this
-
 			setTimeout(function() {
 				scope.$router.push('/code')
 			}, 3000, scope)
