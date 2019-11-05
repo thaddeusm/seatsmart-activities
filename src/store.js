@@ -43,6 +43,22 @@ export default new Vuex.Store({
 		},
 		setUsername(state, studentName) {
 			state.username = studentName.fullName
+		},
+		resetStore(state) {
+			state.roomID = ''
+			state.roomJoined = false
+			state.activityType = ''
+			state.activityData = ''
+			state.activityDate = {}
+			state.mode = 'anonymously'
+			state.activityComplete = false
+			state.students = []
+			state.username = {
+				state.firstName: ''
+				state.lastName: ''
+				state.id: ''
+				highlight: ''
+			}
 		}
 	},
 	actions: {
@@ -60,6 +76,9 @@ export default new Vuex.Store({
 		},
 		setUsername(context, studentName) {
 			context.commit('setUsername', studentName)
+		},
+		resetStore(context) {
+			context.commit('resetStore')
 		}
 	}
 })
