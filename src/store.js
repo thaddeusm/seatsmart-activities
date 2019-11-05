@@ -54,9 +54,9 @@ export default new Vuex.Store({
 			state.activityComplete = false
 			state.students = []
 			state.username = {
-				state.firstName: ''
-				state.lastName: ''
-				state.id: ''
+				firstName: ''
+				lastName: ''
+				id: ''
 				highlight: ''
 			}
 		}
