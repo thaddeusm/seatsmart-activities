@@ -191,6 +191,11 @@ header {
 	text-align: center;
 }
 
+@keyframes spin {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(360deg);}
+}
+
 #logo {
 	height: 5em;
 	animation-name: spin;
@@ -241,10 +246,5 @@ footer {
   	display: block;
   	outline: none;
   	background: var(--yellow);
-}
-
-@keyframes spin {
-	from {transform: rotate(0deg);}
-	to {transform: rotate(360deg);}
 }
 </style>

@@ -9,14 +9,35 @@
 			</transition>
 		</header>
 		<main>
-			<section id="autocompleteOptions">
-				<button class="autocomplete-button" v-for="(student, index) in possibleNames" @click="setName(student)">
+			<section id="autocompleteOptions" v-if="!nameConfirmed">
+				<button 
+					class="autocomplete-button" 
+					v-for="(student, index) in possibleNames" 
+					@click="setName(student)" 
+					v-if="!showSelector"
+				>
 					{{ student.shortName }}
 				</button>
-				<span v-if="possibleNames.length == 2">...</span>
+				<button 
+					v-if="possibleNames.length == 2" 
+					@click="showSelector = true"
+					id="showSelectorButton"
+				>
+					...
+				</button>
+				<select 
+					id="autoCompleteOptionsSelector" 
+					v-if="showSelector"
+					v-model="selectedName"
+				>
+					<option value="" disabled>Find your name:</option>
+					<option v-for="(student, index) in possibleNames" :value="student">
+						{{ student.shortName }}
+					</option>
+				</select>
 			</section>
 			<section id="usernameArea" v-if="!loading && mode !== 'anonymously' && !nameConfirmed">
-				<input type="text" v-model="username" placeholder="Search for your name...">
+				<input v-if="!showSelector" type="text" v-model="username" placeholder="Search for your name...">
 				<button id="confirmButton" @click="confirmName" :disabled="selectedName.shortName == ''">Connect</button>
 			</section>
 			<h4 v-if="!loading && nameConfirmed || mode == 'anonymously'">Waiting for activity to begin...</h4>
@@ -51,7 +72,8 @@ export default {
 				id: '',
 				highlight: ''
 			},
-			nameConfirmed: false
+			nameConfirmed: false,
+			showSelector: false
 		}
 	},
 	computed: {
@@ -95,8 +117,12 @@ export default {
 				}
 			})
 
-			if (arr.length > 2) {
-				return arr.splice(0, 2)
+			if (!this.showSelector) {
+				if (arr.length > 2) {
+					return arr.splice(0, 2)
+				} else {
+					return arr
+				}
 			} else {
 				return arr
 			}
@@ -262,14 +288,6 @@ main {
 	align-self: flex-start;
 }
 
-#logo {
-	animation-name: spin;
-	animation-iteration-count: infinite;
-	animation-duration: 2s;
-	animation-timing-function: ease-in-out;
-	animation-delay: .5s;
-}
-
 #illustration {
 	background: var(--light-gray);
 	padding: 5px;
@@ -283,11 +301,11 @@ h4 {
 
 #usernameArea {
 	text-align: center;
-	width: 300px;
+	width: 320px;
 }
 
 #autocompleteOptions {
-	width: 300px;
+	width: 320px;
 	height: 50px;
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -307,6 +325,12 @@ h4 {
 	border-bottom: 1px solid var(--yellow);
 }
 
+#showSelectorButton {
+	color: var(--white);
+	margin: 10px;
+	font-size: 1em;
+}
+
 #confirmButton {
 	padding: 5px 10px;
 	font-size: 1.3em;
@@ -322,11 +346,6 @@ h4 {
 #confirmButton:disabled {
 	opacity: .7;
 	cursor: not-allowed;
-}
-
-@keyframes spin {
-	from {transform: rotate(0deg);}
-	to {transform: rotate(360deg);}
 }
 
 .fade-enter-active, .fade-leave-active {

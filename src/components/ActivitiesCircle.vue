@@ -34,3 +34,18 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+@keyframes spin {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(360deg);}
+}
+
+div {
+	animation-name: spin;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+	animation-delay: .5s;
+}
+</style>
