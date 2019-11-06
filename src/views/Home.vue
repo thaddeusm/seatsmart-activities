@@ -269,8 +269,9 @@ export default {
 
 .container {
 	height: 100%;
+	width: 100%;
 	display: grid;
-	grid-template-rows: 40% 60%;
+	grid-template-rows: 200px auto;
 	grid-template-areas: 
 		"header"
 		"main";
@@ -280,7 +281,7 @@ export default {
 header {
 	grid-area: header;
 	text-align: center;
-	align-self: center;
+	align-self: flex-start;
 }
 
 main {
@@ -297,6 +298,11 @@ main {
 h4 {
 	color: var(--light-gray);
 	text-align: center;
+	margin-top: 30px;
+}
+
+#logo {
+	margin-top: 50px;
 }
 
 #usernameArea {
@@ -305,7 +311,7 @@ h4 {
 }
 
 #autocompleteOptions {
-	width: 320px;
+	width: 310px;
 	height: 50px;
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -320,7 +326,7 @@ h4 {
 
 .autocomplete-button {
 	color: var(--white);
-	margin: 10px;
+	margin: 5px;
 	font-size: 1em;
 	border-bottom: 1px solid var(--yellow);
 }
