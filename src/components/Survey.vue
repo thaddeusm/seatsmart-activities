@@ -29,7 +29,7 @@
 			</div>
 		</main>
 		<footer>
-			<button class="submit-button" @click="endSurvey">
+			<button v-if="!waitingForReceipt" class="submit-button" @click="endSurvey">
 				submit
 			</button>
 		</footer>
