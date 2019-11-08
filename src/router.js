@@ -31,6 +31,12 @@ export default new Router({
           component: Code
         },
         {
+          path: '/code/:num',
+          name: 'codeInput',
+          props: true,
+          component: Code
+        },
+        {
           path: '/end',
           name: 'end',
           // route level code-splitting

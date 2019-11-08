@@ -52,6 +52,9 @@
 <script>
 export default {
 	name: 'Code',
+	props: {
+		num: String
+	},
 	data() {
 		return {
 			instructions: 'Enter the 4-digit code.',
@@ -132,7 +135,11 @@ export default {
 		}
 	},
 	mounted() {
-		this.$refs['first'].focus()
+		if (this.num) {
+			this.$router.push(`/?room=${this.num}`)
+		} else {
+			this.$refs['first'].focus()
+		}
 	}
 }
 </script>
