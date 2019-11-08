@@ -5,7 +5,7 @@
 		</header>
 		<main>
 			<h2>Something is wrong.</h2>
-			<h4>Please try again.</h4>
+			<h4>Please scan the QR again.</h4>
 		</main>
 	</div>
 </template>
@@ -17,21 +17,6 @@ export default {
 	name: 'Error',
 	components: {
 		ActivitiesCircle
-	},
-	methods: {
-		resetStore() {
-			this.$store.dispatch('resetStore')
-		},
-		routeToCodeView() {
-			let scope = this
-			setTimeout(function() {
-				scope.$router.push('/code')
-			}, 3000, scope)
-		}
-	},
-	mounted() {
-		this.resetStore()
-		this.routeToCodeView()
 	}
 }
 </script>

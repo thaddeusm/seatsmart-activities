@@ -27,21 +27,6 @@ export default {
 		activityType() {
 			return this.$store.state.activityType
 		}
-	},
-	methods: {
-		resetStore() {
-			this.$store.dispatch('resetStore')
-		},
-		routeToCodeView() {
-			let scope = this
-			setTimeout(function() {
-				scope.$router.push('/code')
-			}, 3000, scope)
-		}
-	},
-	mounted() {
-		this.resetStore()
-		this.routeToCodeView()
 	}
 }
 </script>
