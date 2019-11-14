@@ -97,7 +97,7 @@ export default {
 		responseReceiptConfirmed(encryptedResponse) {
 			let decrypted = this.decrypt(encryptedResponse)
 
-			if (decrypted == this.pendingResponse.id) {
+			if (decrypted.id == this.pendingResponse.id) {
 				this.pendingResponse = null
 			}
 		}

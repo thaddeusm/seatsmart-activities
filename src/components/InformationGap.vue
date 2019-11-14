@@ -120,6 +120,9 @@ export default {
 			if (this.mode !== 'preview') {
 				if (this.assignByHighlight && this.mode !== 'anonymously') {
 					this.assignedIndex = this.$store.state.activityData.assignmentsByHighlight[this.highlight]
+				} else if (!this.assignmentsByHighlight && this.mode !== 'anonymously' && this.$store.state.activityData.assignmentsByStudent !== undefined) {
+					this.assignedIndex = this.$store.state.activityData.assignmentsByStudent[this.username.id]
+					console.log('assigned by student');
 				} else {
 					this.assignedIndex = Math.floor(Math.random() * this.assignments.length)
 				}
