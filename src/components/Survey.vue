@@ -155,7 +155,7 @@ export default {
 .container {
 	height: 100%;
 	display: grid;
-	grid-template-rows: auto 70% auto;
+	grid-template-rows: auto 50% 30%;
 	grid-template-areas: 
 		"header"
 		"main"
@@ -188,6 +188,7 @@ header {
 }
 
 #loader {
+	margin: 80px auto;
 	text-align: center;
 }
 
@@ -242,7 +243,7 @@ footer {
 	border-radius: 5px;
 	cursor: pointer;
 	border: 1px solid var(--gray);
-	margin: 15px auto;
+	margin: 0 auto 50px auto;
   	display: block;
   	outline: none;
   	background: var(--yellow);

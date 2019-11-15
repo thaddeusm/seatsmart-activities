@@ -59,8 +59,6 @@ export default {
 				id: id
 			}
 
-			console.log(obj)
-
 			this.$socket.emit('sendResponseData', this.encrypt(obj))
 			this.pendingResponse = obj
 		},
@@ -97,7 +95,10 @@ export default {
 		responseReceiptConfirmed(encryptedResponse) {
 			let decrypted = this.decrypt(encryptedResponse)
 
-			if (decrypted.id == this.pendingResponse.id) {
+			console.log('pending response prop: ', this.pendingResponse)
+			console.log('Response received by host: ', decrypted)
+
+			if (decrypted == this.pendingResponse.id) {
 				this.pendingResponse = null
 			}
 		}

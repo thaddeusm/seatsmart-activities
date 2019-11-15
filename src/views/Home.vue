@@ -271,7 +271,7 @@ export default {
 	height: 100%;
 	width: 100%;
 	display: grid;
-	grid-template-rows: 200px auto;
+	grid-template-rows: 50% 50%;
 	grid-template-areas: 
 		"header"
 		"main";
@@ -281,7 +281,7 @@ export default {
 header {
 	grid-area: header;
 	text-align: center;
-	align-self: flex-start;
+	align-self: center;
 }
 
 main {
