@@ -11,7 +11,7 @@
 			/>
 		</header>
 		<main>
-			<div v-if="waitingForReceipt" id="loader">
+			<div v-if="waitingForReceipt || sending" id="loader">
 				<img ref="logo"src="@/assets/activities-circle.svg" alt="activities logo" id="logo" key="logo">
 			</div>
 			<div v-else>
@@ -29,7 +29,7 @@
 			</div>
 		</main>
 		<footer>
-			<button v-if="!waitingForReceipt" class="submit-button" @click="endSurvey">
+			<button v-if="!waitingForReceipt" class="submit-button" @click="endSurvey" :disabled="sending">
 				submit
 			</button>
 		</footer>
@@ -54,7 +54,8 @@ export default {
 	data() {
 		return {
 			started: false,
-			chosenIndex: null
+			chosenIndex: null,
+			sending: false
 		}
 	},
 	computed: {
@@ -112,6 +113,9 @@ export default {
 	},
 	methods: {
 		endSurvey() {
+			// disable button
+			this.sending = true
+
 			// send response to host if a real session
 			if (this.mode !== 'preview') {
 				if (this.mode == 'anonymously') {
@@ -127,7 +131,6 @@ export default {
 						choice: this.choices[this.chosenIndex],
 						student: this.username
 					})
-
 				}
 			}
 		},

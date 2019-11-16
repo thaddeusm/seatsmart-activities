@@ -93,6 +93,7 @@ export default {
 			}
 		},
 		responseReceiptConfirmed() {
+			console.log('Server received response')
 			this.pendingResponse = null
 		}
 	},
