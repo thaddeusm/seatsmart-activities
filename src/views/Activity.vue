@@ -92,15 +92,8 @@ export default {
 				this.$router.push('/cancel')
 			}
 		},
-		responseReceiptConfirmed(encryptedResponse) {
-			let decrypted = this.decrypt(encryptedResponse)
-
-			console.log('pending response prop: ', this.pendingResponse)
-			console.log('Response received by host: ', decrypted)
-
-			if (decrypted == this.pendingResponse.id) {
-				this.pendingResponse = null
-			}
+		responseReceiptConfirmed() {
+			this.pendingResponse = null
 		}
 	},
 	mounted() {
