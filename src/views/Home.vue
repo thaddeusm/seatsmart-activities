@@ -208,7 +208,7 @@ export default {
     		let record = localStorage.getItem(room)
     		if (record !== null) {
     			let parsed = JSON.parse(record)
-	    		if (parsed.completed && parsed.date == this.date) {
+	    		if (parsed.completed && parsed.date == this.date && this.activityType !== 'information gap') {
 	    			return true
 	    		} else {
 	    			return false
