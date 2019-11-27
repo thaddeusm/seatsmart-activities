@@ -134,6 +134,10 @@ export default {
 
 			this.$socket.emit('requestActivityData')
 			this.$socket.emit('checkActivityStatus', this.room)
+
+			if (this.activityType == 'information gap') {
+    			this.startActivity()
+    		}
 		},
 		incomingActivityData(data) {
 			let decrypted = this.decrypt(data)
@@ -163,9 +167,12 @@ export default {
 			this.$socket.emit('rejoinActivityRoom', this.room)
 		},
 		rejoinedActivityRoom() {
-			console.log('rejoined room')
 			this.$socket.emit('requestActivityData')
 			this.$socket.emit('checkActivityStatus', this.room)
+
+			if (this.activityType == 'information gap') {
+    			this.startActivity()
+    		}
 		},
 		activityCanceled() {
 			this.$router.push('/cancel')
@@ -201,16 +208,9 @@ export default {
     		let record = localStorage.getItem(room)
     		if (record !== null) {
     			let parsed = JSON.parse(record)
-
-	    		console.log('Found record in localStorage: ', parsed)
-
 	    		if (parsed.completed && parsed.date == this.date) {
-	    			console.log('already completed')
-
 	    			return true
 	    		} else {
-	    			console.log('incomplete')
-
 	    			return false
 	    		}
     		}
