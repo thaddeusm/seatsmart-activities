@@ -225,6 +225,10 @@ export default {
     		this.$socket.emit('checkActivityStatus', this.room)
     		this.$socket.emit('sendingUsername', this.encrypt(this.selectedName.fullName))
     		this.saveUserInfoToStorage()
+
+    		if (this.activityType == 'information gap') {
+    			this.startActivity()
+    		}
     	},
     	checkForStoredUserInfo() {
     		let students = this.possibleNames
