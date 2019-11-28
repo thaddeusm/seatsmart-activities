@@ -18,6 +18,7 @@
 					v-else-if="assignments[assignedIndex].resourceType == 'img'"
 					:src="assignments[assignedIndex].resourceData" 
 					alt="image"
+					@click="openFullImage(assignments[assignedIndex].resourceData)"
 				>
 				<a 
 					v-else
@@ -140,6 +141,9 @@ export default {
     	},
     	encrypt(data) {
             return sjcl.encrypt(this.roomID, JSON.stringify(data))
+        },
+        openFullImage(imgUrl) {
+        	window.open(imgUrl)
         }
 	},
 	created() {
