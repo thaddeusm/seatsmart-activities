@@ -8,7 +8,7 @@ import VueSocketIO from 'vue-socket.io'
 
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: SocketIO('https://remote-server.seatsmart.tech'),
+    connection: SocketIO('https://seatsmart-remote-server.glitch.me'),
     vuex: {
       store,
       actionPrefix: "SOCKET_"
