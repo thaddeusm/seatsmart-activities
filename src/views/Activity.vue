@@ -11,7 +11,7 @@
 			v-on:retry="retrySendResponse"
 			:waitingForReceipt="pendingResponse !== null"
 		/>
-		<ResponsePool 
+		<WordCloud 
 			v-else-if="activityType == 'word cloud'"
 			v-on:send-response="sendResponse"
 			v-on:retry="retrySendResponse"
