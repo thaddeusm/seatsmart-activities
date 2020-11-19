@@ -147,6 +147,8 @@ export default {
 
 			this.$store.dispatch('setActivityData', decrypted)
 
+			console.log(decrypted)
+
 			if (this.mode == 'preview') {
 				this.startActivity()
 			}
