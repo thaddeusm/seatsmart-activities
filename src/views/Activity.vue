@@ -11,6 +11,12 @@
 			v-on:retry="retrySendResponse"
 			:waitingForReceipt="pendingResponse !== null"
 		/>
+		<ResponsePool 
+			v-else-if="activityType == 'word cloud'"
+			v-on:send-response="sendResponse"
+			v-on:retry="retrySendResponse"
+			:waitingForReceipt="pendingResponse !== null"
+		/>
 		<InformationGap 
 			v-else
 			v-on:send-response="sendResponse"
@@ -26,13 +32,15 @@ import simpleId from 'simple-id'
 import Survey from '@/components/Survey.vue'
 import ResponsePool from '@/components/ResponsePool.vue'
 import InformationGap from '@/components/InformationGap.vue'
+import WordCloud from '@/components/WordCloud.vue'
 
 export default {
 	name: 'Activity',
 	components: {
 		Survey,
 		ResponsePool,
-		InformationGap
+		InformationGap,
+		WordCloud
 	},
 	data() {
 		return {

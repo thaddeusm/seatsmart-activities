@@ -6,6 +6,7 @@
 				<SurveyIllustration width="280" v-else-if="activityType == 'survey'" id="illustration" />
 				<ResponsePoolIllustration width="280" v-else-if="activityType == 'response pool'" id="illustration" />
 				<InformationGapIllustration width="280" v-else-if="activityType == 'information gap'" id="illustration" />
+				<WordCloudIllustration width="280" v-else-if="activityType == 'word cloud'" id="illustration" />
 			</transition>
 		</header>
 		<main>
@@ -51,6 +52,7 @@ import ActivitiesCircle from '@/components/ActivitiesCircle.vue'
 import SurveyIllustration from '@/components/SurveyIllustration.vue'
 import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
 import InformationGapIllustration from '@/components/InformationGapIllustration.vue'
+import WordCloudIllustration from '@/components/WordCloudIllustration.vue'
 
 export default {
 	name: 'Home',
@@ -61,7 +63,8 @@ export default {
 		ActivitiesCircle,
 		SurveyIllustration,
 		ResponsePoolIllustration,
-		InformationGapIllustration
+		InformationGapIllustration,
+		WordCloudIllustration
 	},
 	data() {
 		return {
