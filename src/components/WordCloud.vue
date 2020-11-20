@@ -235,7 +235,7 @@ textarea {
 	margin: 0 auto;
 	width: 90%;
 	max-width: 250px;
-	height: 150px;
+	height: 1.2em;
 }
 
 footer {

@@ -3,7 +3,8 @@
 		<header>
 			<SurveyIllustration width="280" v-if="activityType == 'survey'" id="illustration" />
 			<ResponsePoolIllustration width="280" v-else-if="activityType == 'response pool'" id="illustration" />
-			<InformationGapIllustration width="280" v-else id="illustration" />
+			<InformationGapIllustration width="280" v-else-if="activityType == 'information gap'" id="illustration" />
+			<WordCloudIllustration width="280" v-else-if="activityType == 'word cloud'" id="illustration" />
 		</header>
 		<main>
 			<h2>{{ activityType }} complete</h2>
@@ -15,13 +16,15 @@
 import SurveyIllustration from '@/components/SurveyIllustration.vue'
 import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
 import InformationGapIllustration from '@/components/InformationGapIllustration.vue'
+import WordCloudIllustration from '@/components/WordCloudIllustration.vue'
 
 export default {
 	name: 'End',
 	components: {
 		SurveyIllustration,
 		ResponsePoolIllustration,
-		InformationGapIllustration
+		InformationGapIllustration,
+		WordCloudIllustration
 	},
 	computed: {
 		activityType() {
