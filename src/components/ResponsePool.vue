@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<header :class="[timeLimitEnabled ? 'split-header': '']">
+		<header>
 			<ResponsePoolIllustration width="230" id="activityIcon" />
 		</header>
 		<main>
