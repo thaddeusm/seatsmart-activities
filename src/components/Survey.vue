@@ -2,13 +2,6 @@
 	<div class="container">
 		<header :class="[timeLimitEnabled ? 'split-header': '']">
 			<SurveyIllustration width="230" id="activityIcon" />
-			<Countdown
-				id="countdown"  
-				v-if="timeLimitEnabled"
-				:countdownRunning="started"
-				:timeLimit="timeLimitInSeconds"
-				v-on:countdown-ended="endSurvey" 
-			/>
 		</header>
 		<main>
 			<div v-if="waitingForReceipt || sending" id="loader">
@@ -39,13 +32,11 @@
 <script>
 import sjcl from 'sjcl'
 
-import Countdown from '@/components/Countdown.vue'
 import SurveyIllustration from '@/components/SurveyIllustration.vue'
 
 export default {
 	name: 'Survey',
 	components: {
-		Countdown,
 		SurveyIllustration
 	},
 	props: {

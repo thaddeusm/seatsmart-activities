@@ -2,13 +2,6 @@
 	<div class="container">
 		<header :class="[timeLimitEnabled ? 'split-header': '']">
 			<ResponsePoolIllustration width="230" id="activityIcon" />
-			<Countdown
-				id="countdown"  
-				v-if="timeLimitEnabled"
-				:countdownRunning="started"
-				:timeLimit="timeLimitInSeconds"
-				v-on:countdown-ended="endResponsePool" 
-			/>
 		</header>
 		<main>
 			<div v-if="waitingForReceipt" id="loader">
@@ -38,13 +31,11 @@
 </template>
 
 <script>
-import Countdown from '@/components/Countdown.vue'
 import ResponsePoolIllustration from '@/components/ResponsePoolIllustration.vue'
 
 export default {
 	name: 'ResponsePool',
 	components: {
-		Countdown,
 		ResponsePoolIllustration
 	},
 	props: {
