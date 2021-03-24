@@ -106,20 +106,27 @@ export default {
 	methods: {
 		sendResponse() {
 			// send response to host if a real session
-			if (this.mode !== 'preview') {
-				if (this.mode == 'anonymously') {
-					console.log('sending response')
 
-					this.$emit('send-response', {
-						response: this.response.toLowerCase().trim()
-					})
-				} else {
-					console.log('sending response')
+			let responses = this.response.split(',')
 
-					this.$emit('send-response', {
-						response: this.response.toLowerCase().trim(),
-						student: this.username
-					})
+			for (let i=0; i<responses.length; i++) {
+				let response = responses[i];
+
+				if (this.mode !== 'preview') {
+					if (this.mode == 'anonymously') {
+						console.log('sending response')
+
+						this.$emit('send-response', {
+							response: response.toLowerCase().trim()
+						})
+					} else {
+						console.log('sending response')
+
+						this.$emit('send-response', {
+							response: response.toLowerCase().trim(),
+							student: this.username
+						})
+					}
 				}
 			}
 
