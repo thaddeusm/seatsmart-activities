@@ -11,9 +11,9 @@
 				<h2>
 					{{ prompt }}
 				</h2>
-				<button 
-					v-for="(choice, index) in choices" 
-					:class="[chosenIndex == index ? 'selected':'' , 'choice-button']" 
+				<button
+					v-for="(choice, index) in choices"
+					:class="[chosenIndex == index ? 'selected':'' , 'choice-button']"
 					@click="markChoice(index)"
 					:key="`choice${index}`"
 				>
@@ -150,7 +150,7 @@ export default {
 	height: 100%;
 	display: grid;
 	grid-template-rows: auto 50% 30%;
-	grid-template-areas: 
+	grid-template-areas:
 		"header"
 		"main"
 		"footer";
@@ -238,8 +238,8 @@ footer {
 	cursor: pointer;
 	border: 1px solid var(--gray);
 	margin: 0 auto 50px auto;
-  	display: block;
-  	outline: none;
-  	background: var(--yellow);
+	display: block;
+	outline: none;
+	background: var(--yellow);
 }
 </style>
