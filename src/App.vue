@@ -1,5 +1,5 @@
 <template>
-    <div id="app">    
+    <div id="app">
         <router-view/>
     </div>
 </template>
@@ -119,6 +119,7 @@ button {
     font-family: "ArchivoNarrow";
     outline: none;
     cursor: pointer;
+    color: var(--black);
 }
 
 a {
