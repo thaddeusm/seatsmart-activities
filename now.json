@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": ["activities.seatsmart.tech"],
+  "alias": ["seatsmart-activities.thaddeus.education"],
   "name": "seatsmart-activities",
   "builds": [{ "src": "package.json", "use": "@now/static-build" }],
   "routes": [
