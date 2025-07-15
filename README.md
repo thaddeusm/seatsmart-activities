@@ -1,4 +1,4 @@
-![Seatsmart Icon](https://seatsmart.thaddeus.education/img/logo.b38f8b88.svg)
+![Seatsmart Icon](https://seatsmart.vercel.app/img/logo.b38f8b88.svg)
 
 # Seatsmart Activities
 This web-based  UI communicates in realtime with the desktop application
